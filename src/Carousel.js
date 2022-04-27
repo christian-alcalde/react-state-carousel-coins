@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./Carousel.css";
 import Card from "./Card";
 
-
 /** Carousel: displays images and arrows to navigate through them
  *
  * Props:
@@ -34,10 +33,17 @@ function Carousel({ photos, title }) {
     <div className="Carousel">
       <h1>{title}</h1>
       <div className="Carousel-main">
-        {currCardIdx !== 0 ? <i
-          className="fas fa-chevron-circle-left fa-2x"
-          onClick={goBackward}
-        /> : <></>}
+        {currCardIdx !== 0 ? (
+          <i
+            className="fas fa-chevron-circle-left fa-2x"
+            onClick={goBackward}
+          />
+        ) : (
+          <i
+            className="fas fa-chevron-circle-left fa-2x hidden"
+            onClick={goBackward}
+          />
+        )}
 
         <Card
           caption={currCard.caption}
@@ -45,11 +51,17 @@ function Carousel({ photos, title }) {
           currNum={currCardIdx + 1}
           totalNum={total}
         />
-        {currCardIdx !== photos.length - 1 ? <i
-          className="fas fa-chevron-circle-right fa-2x"
-          onClick={goForward}
-        /> : <></>}
-
+        {currCardIdx !== photos.length - 1 ? (
+          <i
+            className="fas fa-chevron-circle-right fa-2x"
+            onClick={goForward}
+          />
+        ) : (
+          <i
+            className="fas fa-chevron-circle-right fa-2x hidden"
+            onClick={goBackward}
+          />
+        )}
       </div>
     </div>
   );

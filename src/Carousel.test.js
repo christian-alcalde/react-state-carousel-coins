@@ -2,30 +2,21 @@ import { render, fireEvent } from "@testing-library/react";
 import Carousel from "./Carousel";
 import TEST_IMAGES from "./_testCommon.js";
 
-
-
 it("smoke test", function () {
-  render(<Carousel
-    photos={TEST_IMAGES}
-    title="images for testing"
-  />);
+  render(<Carousel photos={TEST_IMAGES} title="images for testing" />);
 });
 
 it("matches snapshot", function () {
-  const { container } = render(<Carousel
-    photos={TEST_IMAGES}
-    title="images for testing"
-  />);
+  const { container } = render(
+    <Carousel photos={TEST_IMAGES} title="images for testing" />
+  );
 
   expect(container).toMatchSnapshot();
 });
 
 it("works when you click on the right arrow", function () {
   const { container } = render(
-    <Carousel
-      photos={TEST_IMAGES}
-      title="images for testing"
-    />
+    <Carousel photos={TEST_IMAGES} title="images for testing" />
   );
   // expect the first image to show, but not the second
   expect(
@@ -46,17 +37,11 @@ it("works when you click on the right arrow", function () {
   expect(
     container.querySelector('img[alt="testing image 2"]')
   ).toBeInTheDocument();
-
 });
-
-
 
 it("works when you click on the left arrow", function () {
   const { container } = render(
-    <Carousel
-      photos={TEST_IMAGES}
-      title="images for testing"
-    />
+    <Carousel photos={TEST_IMAGES} title="images for testing" />
   );
 
   const rightArrow = container.querySelector(".fa-chevron-circle-right");
@@ -81,45 +66,34 @@ it("works when you click on the left arrow", function () {
   expect(
     container.querySelector('img[alt="testing image 2"]')
   ).not.toBeInTheDocument();
-
 });
-
 
 it("left arrow missing on first image", function () {
   const { container } = render(
-    <Carousel
-      photos={TEST_IMAGES}
-      title="images for testing"
-    />
+    <Carousel photos={TEST_IMAGES} title="images for testing" />
   );
 
   const leftArrow = container.querySelector(".fa-chevron-circle-left");
 
-  expect(leftArrow).toBeFalsy();
+  expect(leftArrow).toHaveClass("hidden");
 });
 
 it("right arrow missing on last image", function () {
-  const { container, debug } = render(
-    <Carousel
-      photos={[TEST_IMAGES[0]]}
-      title="images for testing"
-    />
+  const { container } = render(
+    <Carousel photos={[TEST_IMAGES[0]]} title="images for testing" />
   );
   const rightArrow = container.querySelector(".fa-chevron-circle-right");
 
-  expect(rightArrow).toBeFalsy();
+  expect(rightArrow).toHaveClass("hidden");
 });
 
 it("both arrows missing on single image", function () {
-  const { container} = render(
-    <Carousel
-      photos={[TEST_IMAGES[0]]}
-      title="images for testing"
-    />
+  const { container } = render(
+    <Carousel photos={[TEST_IMAGES[0]]} title="images for testing" />
   );
   const rightArrow = container.querySelector(".fa-chevron-circle-right");
   const leftArrow = container.querySelector(".fa-chevron-circle-left");
 
-  expect(rightArrow).toBeFalsy();
-  expect(leftArrow).toBeFalsy();
+  expect(leftArrow).toHaveClass("hidden");
+  expect(rightArrow).toHaveClass("hidden");
 });

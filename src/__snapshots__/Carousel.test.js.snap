@@ -11,6 +11,9 @@ exports[`matches snapshot 1`] = `
     <div
       class="Carousel-main"
     >
+      <i
+        class="fas fa-chevron-circle-left fa-2x hidden"
+      />
       <div
         class="Card"
       >
